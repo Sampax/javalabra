@@ -1,4 +1,4 @@
-javalabra
+﻿javalabra
 =========
 
-Ohjelmoinnin harjoitustyö kevät 2013
+Ohjelmoinnin harjoitustyö, kevät 2013
