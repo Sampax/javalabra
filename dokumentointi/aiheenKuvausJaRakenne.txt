@@ -1,0 +1,41 @@
+Ohjelmoinnin harjoitustyö III/2013
+
+
+
+Aihe:Tetris
+
+
+
+Perinteinen Tetris -peli javalla. Valmis peli koostuu aloitusvalikosta, pelilaudasta ja tietenkin itse pelilogiikasta. Uudempien Tetristen ominaisuudet, kuten moninpeli, powerupit ynnä muut eivät ainakaan alkuvaiheessa kuulu projektin fokukseen, mutta tavoitteena on luoda asteittain vaikeutuva (=nopeutuva) pelikokemus. Valmiiseen ohjelmaan tulee pelialueen lisäksi mahdollisesti yksinkertainen pisteenlaskuolio ja High score -kirjanpito.
+
+
+
+Käyttäjät: pelaaja
+
+
+
+pelaajan toiminnot:
+
+
+
+Pelin aloittaminen
+
+	-Onnistuu vain jos sillä hetkellä ei ole peliä käynnissä
+
+
+Pelin lopettaminen
+
+	-Onnistuu pelin ollessa käynnissä, palaa alkuvalikkoon(?)
+
+
+
+Pelaaminen 
+	
+	-(pelinappulan siirto pelikentässä)
+
+
+
+
+Valikkotoiminnot
+	-pelin sulkeminen
+	-high score -taulukon tarkastelu

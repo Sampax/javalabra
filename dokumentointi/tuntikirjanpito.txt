@@ -1,0 +1,2 @@
+21.1.2013
+-1.5h: githubin säätö, netbeans -projektin luominen, aloitusohjeiden lukeminen
