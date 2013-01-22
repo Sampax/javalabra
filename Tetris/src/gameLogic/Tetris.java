@@ -1,4 +1,4 @@
-package tetris;
+package gameLogic;
 
 /**
  *
@@ -12,7 +12,7 @@ public class Tetris {
     public static void main(String[] args) {
         Board board= new Board();
         Tetromino piece = new Tetromino();
-        board.drawTetromino(piece, 4, 1);
+        board.drawTetromino(piece, 5, 1);
         board.printBoard();
     }
 }

@@ -1,8 +1,6 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-package tetris;
+
+package gameLogic;
+
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -45,11 +43,10 @@ public class BoardTest {
     }
 
     /**
-     * Test of getBoard method, of class Board.
+     * Test of getBoard method
      */
     @Test
     public void testGetBoard() {
-        System.out.println("getBoard");
         Board instance = new Board();
         int [][] expResult =
             {{9,0,0,0,0,0,0,0,0,0,0,9},
@@ -79,21 +76,20 @@ public class BoardTest {
 
 
     /**
-     * Test of drawTetromino method, of class Board.
+     * Test of drawTetromino method
      */
     @Test
     public void testDrawTetromino() {
-        System.out.println("drawTetromino");
         Tetromino piece = new Tetromino(0);
-        int pointerX = 4;
+        int pointerX = 5;
         int pointerY = 1;
         Board instance = new Board();
         instance.drawTetromino(piece, pointerX, pointerY);
         int[][] expResult = {
-            {9,0,0,0,1,0,0,0,0,0,0,9},
-            {9,0,0,0,1,0,0,0,0,0,0,9},
-            {9,0,0,0,1,0,0,0,0,0,0,9},
-            {9,0,0,0,1,0,0,0,0,0,0,9},
+            {9,0,0,0,0,1,0,0,0,0,0,9},
+            {9,0,0,0,0,1,0,0,0,0,0,9},
+            {9,0,0,0,0,1,0,0,0,0,0,9},
+            {9,0,0,0,0,1,0,0,0,0,0,9},
             {9,0,0,0,0,0,0,0,0,0,0,9},
             {9,0,0,0,0,0,0,0,0,0,0,9},
             {9,0,0,0,0,0,0,0,0,0,0,9},
@@ -116,11 +112,10 @@ public class BoardTest {
     }
 
     /**
-     * Test of printBoard method, of class Board.
+     * Test of printBoard method
      */
     @Test
     public void testPrintBoard() {
-        System.out.println("printBoard");
         outContent.reset();
         Board instance = new Board();
         instance.printBoard();

@@ -2,7 +2,8 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tetris;
+package gameLogic;
+
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -38,11 +39,10 @@ public class TetrominoTest {
     }
 
     /**
-     * Test of getTetromino method, of class Tetromino.
+     * Test of getTetromino method
      */
     @Test
     public void testGetTetromino() {
-        System.out.println("getTetromino");
         Tetromino instance = new Tetromino(0);
         int[][] expResult = {{0, 0}, {0, 1}, {0, 2}, {0, -1}};
         int[][] result = instance.getTetromino();
@@ -50,11 +50,10 @@ public class TetrominoTest {
     }
 
     /**
-     * Test of getStyle method, of class Tetromino.
+     * Test of getStyle method
      */
     @Test
     public void testGetStyle() {
-        System.out.println("getStyle");
         Tetromino instance = new Tetromino(0);
         int expResult = 0;
         int result = instance.getStyle();
