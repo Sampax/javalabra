@@ -1,2 +1,5 @@
 21.1.2013
 -1.5h: githubin säätö, netbeans -projektin luominen, aloitusohjeiden lukeminen
+
+22.1.2013
+-6h: koodiluuranko pystyyn, pelilauta ja -nappulat, testit, luokkakaavio
