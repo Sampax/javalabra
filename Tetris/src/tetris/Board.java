@@ -20,10 +20,7 @@ public class Board {
         return board;
     }
     
-    public void updateSquare(int value, int pointerX, int pointerY) {
-        return;
-    }
-    
+
     public void drawTetromino(Tetromino piece, int pointerX, int pointerY) {
         int[][] temp=piece.getTetromino();
         int style = piece.getStyle();
