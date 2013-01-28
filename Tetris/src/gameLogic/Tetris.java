@@ -13,6 +13,12 @@ public class Tetris {
         Board board= new Board();
         Tetromino piece = new Tetromino();
         board.drawTetromino(piece, 5, 1);
-        board.printBoard();
+        System.out.println(board.printBoard());
+        board.scrubTetromino(piece, 5, 1);
+        piece.rotate();
+        board.drawTetromino(piece, 5, 1);
+        System.out.println(board.printBoard());
     }
+    
+
 }

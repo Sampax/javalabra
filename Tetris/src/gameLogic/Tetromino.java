@@ -45,6 +45,21 @@ public class Tetromino {
         tetromino=tetrominoArrays[this.style];
     }
     
+    public void rotate() {
+        this.tetromino=this.nextRotation();
+    }
+    
+    public int[][] nextRotation() {
+        if (this.style==1)
+            return this.tetromino;
+        int [][] result = new int[4][2];
+        for(int i=0;i<4;i++) {
+            result[i][0]=this.tetromino[i][1];
+            result[i][1]=-this.tetromino[i][0];
+        }
+        return result;
+    }
+    
     public int[][] getTetromino() {
         return tetromino;
     }

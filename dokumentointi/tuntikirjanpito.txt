@@ -3,3 +3,6 @@
 
 22.1.2013
 -6h: koodiluuranko pystyyn, pelilauta ja -nappulat, testit, luokkakaavio
+
+28.1.2013
+-4h: tetrominon pyörittelyn pähkäilyä
