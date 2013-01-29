@@ -8,8 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
+
 
 /**
  *
@@ -17,7 +16,7 @@ import java.io.PrintStream;
  */
 public class BoardTest {
     
-    private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+
             
     public BoardTest() {
         
@@ -34,12 +33,12 @@ public class BoardTest {
     
     @Before
     public void setUp() {
-        System.setOut(new PrintStream(outContent));
+
     }
     
     @After
     public void tearDown() {
-        System.setOut(null);
+
     }
 
     /**
@@ -84,7 +83,7 @@ public class BoardTest {
         int pointerX = 5;
         int pointerY = 1;
         Board instance = new Board();
-        instance.drawTetromino(piece, pointerX, pointerY);
+        instance.drawTetromino(piece);
         int[][] expResult = {
             {9,0,0,0,0,1,0,0,0,0,0,9},
             {9,0,0,0,0,1,0,0,0,0,0,9},
@@ -116,9 +115,9 @@ public class BoardTest {
      */
     @Test
     public void testPrintBoard() {
-        outContent.reset();
+
         Board instance = new Board();
-        instance.printBoard();
+        String result=instance.printBoard();
         String expResult =
                 "0000000000\n"+
                 "0000000000\n"+
@@ -141,6 +140,6 @@ public class BoardTest {
                 "0000000000\n"+
                 "0000000000\n";
                 
-        assertEquals(expResult, outContent.toString());
+        assertEquals(expResult, result);
     }
 }

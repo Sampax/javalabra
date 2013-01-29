@@ -7,6 +7,8 @@ package gameLogic;
 public class Board {
     
     private static int board[][];
+    private static int py;
+    private static int px;
     
     public Board() {
         board = new int[21][12];
@@ -14,39 +16,72 @@ public class Board {
             board[i][11]=board[i][0]=9;
         for(int i=0;i<12;i++)
             board[20][i]=9;
+        py=1;
+        px=5;
     }
     
     public int[][] getBoard() {
         return board;
     }
     
+    public int getPy() {
+        return py;
+    }
+    
+    public int getPx() {
+        return px;
+    }
 
-    public void drawTetromino(Tetromino piece, int pointerX, int pointerY) {
+    public void drawTetromino(Tetromino piece) {
         int[][] temp=piece.getTetromino();
         int style = piece.getStyle();
         
         if(style == 7)
             return;
         for(int i=0; i<4;i++) {
-            board[pointerY+temp[i][1]][pointerX+temp[i][0]]=1;
+            board[py+temp[i][1]][px+temp[i][0]]=1;
         }
     }
     
-    public void scrubTetromino(Tetromino piece, int pointerX, int pointerY) {
+    public void scrubTetromino(Tetromino piece) {
         int[][] temp=piece.getTetromino();
         for(int i=0; i<4;i++) 
-            board[pointerY+temp[i][1]][pointerX+temp[i][0]]=0;        
+            board[py+temp[i][1]][px+temp[i][0]]=0;        
     }
     
+    public boolean checkForSpace(Tetromino piece, int [][] newPoints) {
+        boolean result=true;
+        scrubTetromino(piece);
+        for(int i=0; i<4;i++) {
+            if(board[py+newPoints[i][1]][px+newPoints[i][0]]!=0)
+                result=false;
+        }
+        drawTetromino(piece);
+        return result;
+    }
+ 
     public boolean checkForSpace(Tetromino piece, int [][] newPoints, int pointerX, int pointerY) {
         boolean result=true;
-        scrubTetromino(piece, pointerX, pointerY);
+        scrubTetromino(piece);
         for(int i=0; i<4;i++) {
             if(board[pointerY+newPoints[i][1]][pointerX+newPoints[i][0]]!=0)
                 result=false;
         }
-        drawTetromino(piece, pointerX, pointerY);
+        drawTetromino(piece);
         return result;
+    }
+    
+    public Tetromino moveDown(Tetromino piece) {
+        if(piece==null)
+            return piece;
+        if(this.checkForSpace(piece, piece.getTetromino(), px, py+1)) {
+            scrubTetromino(piece);
+            py++;            
+            drawTetromino(piece);
+            return piece;
+        }
+        else
+            return releaseTetromino();
     }
     
     public String printBoard(){ //returns the visible portion of the board as a String
@@ -57,6 +92,12 @@ public class Board {
             result+="\n";
         }
         return result;
+    }
+
+    private Tetromino releaseTetromino() {
+        py=1;
+        px=5;
+        return new Tetromino();
     }
     
 }
