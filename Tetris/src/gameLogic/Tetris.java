@@ -4,8 +4,6 @@ package gameLogic;
  *
  * @author SampaX
  */
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Tetris {
 
@@ -15,19 +13,19 @@ public class Tetris {
     public static Board board;
     public static Tetromino piece;
     public static IO.Input input;
-    public static Timer timer;
+
     
     public static void main(String[] args) {
         initialize();
-        
+        //simulate gameLoop execution
+        for(int i=0;i<45;i++)
+            gameLoop();
     }
     
     public static void initialize() {
         board= new Board();
         piece = new Tetromino();
         input = new IO.Input();
-        timer = new Timer();
-        timer.schedule(new TimerTick(), 1);
     }
     
     public static void gameLoop() {
@@ -36,14 +34,4 @@ public class Tetris {
     }
     
 
-}
-
-//Will definitely be changed, quick workaround under time constraints
-
-class TimerTick extends TimerTask {
-
-        @Override
-        public void run() {
-            Tetris.gameLoop();
-        }
 }
