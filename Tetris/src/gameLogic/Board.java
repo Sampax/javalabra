@@ -54,18 +54,7 @@ public class Board {
         for(int i=0; i<4;i++) 
             board[py+temp[i][1]][px+temp[i][0]]=0;        
     }
-    
-/*    public boolean checkForSpace(Tetromino piece, int [][] newPoints) {
-        boolean result=true;
-        scrubTetromino(piece);
-        for(int i=0; i<4;i++) {
-            if(board[py+newPoints[i][1]][px+newPoints[i][0]]!=0)
-                result=false;
-        }
-        drawTetromino(piece);
-        return result;
-    }
- */
+
     public boolean checkForSpace(Tetromino piece, int [][] newPoints, int pointerX, int pointerY) {
         boolean result=true;
         scrubTetromino(piece);

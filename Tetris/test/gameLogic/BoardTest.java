@@ -181,6 +181,19 @@ public class BoardTest {
        assertEquals(result, true);
     }  
     
+    /*
+     * Test of correct return on moveDown method when space available
+     */
+    @Test
+    public void testMoveDown1() {
+       Tetromino piece= new Tetromino(1);
+       Tetromino expResult = new Tetromino(1);
+       Board instance = new Board();
+       piece=instance.moveDown(piece);
+       assertArrayEquals(expResult.getTetromino(),piece.getTetromino());
+    }
+
+
     /**
      * Test of printBoard method
      */

@@ -6,3 +6,7 @@
 
 28.1.2013
 -4h: tetrominon pyörittelyn pähkäilyä
+
+29.1.2013
+-4h: tetrominon pyörittely, gameloopin alustusta
+
