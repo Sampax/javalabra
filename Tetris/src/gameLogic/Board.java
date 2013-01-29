@@ -31,6 +31,12 @@ public class Board {
     public int getPx() {
         return px;
     }
+    public void setPy(int value) {
+        py=value;
+    }
+    public void setPx(int value) {
+        px=value;
+    }
 
     public void drawTetromino(Tetromino piece) {
         int[][] temp=piece.getTetromino();
@@ -49,7 +55,7 @@ public class Board {
             board[py+temp[i][1]][px+temp[i][0]]=0;        
     }
     
-    public boolean checkForSpace(Tetromino piece, int [][] newPoints) {
+/*    public boolean checkForSpace(Tetromino piece, int [][] newPoints) {
         boolean result=true;
         scrubTetromino(piece);
         for(int i=0; i<4;i++) {
@@ -59,7 +65,7 @@ public class Board {
         drawTetromino(piece);
         return result;
     }
- 
+ */
     public boolean checkForSpace(Tetromino piece, int [][] newPoints, int pointerX, int pointerY) {
         boolean result=true;
         scrubTetromino(piece);

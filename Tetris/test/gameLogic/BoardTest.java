@@ -80,8 +80,6 @@ public class BoardTest {
     @Test
     public void testDrawTetromino() {
         Tetromino piece = new Tetromino(0);
-        int pointerX = 5;
-        int pointerY = 1;
         Board instance = new Board();
         instance.drawTetromino(piece);
         int[][] expResult = {
@@ -110,6 +108,79 @@ public class BoardTest {
         assertArrayEquals(expResult, instance.getBoard());
     }
 
+    /**
+     * Test of scrubTetromino method
+     */
+    @Test
+    public void testScrubTetromino() {
+        Tetromino piece = new Tetromino(0);
+        Board instance = new Board();
+        instance.drawTetromino(piece);
+        instance.scrubTetromino(piece);
+        int[][] expResult = {
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,9,9,9,9,9,9,9,9,9,9,9}
+        };
+        assertArrayEquals(expResult, instance.getBoard());
+    }
+    
+    /**
+     * Test of checkForSpace method when no space available
+     */
+    @Test
+    public void testCheckForSpaceFalse1() {
+       Tetromino piece= new Tetromino(1);
+       Board instance = new Board();
+       instance.setPy(3);
+       instance.drawTetromino(piece);
+       instance.setPy(1);
+       instance.drawTetromino(piece);
+       boolean result=instance.checkForSpace(piece, piece.getTetromino(), instance.getPx(), instance.getPy()+1);
+       assertEquals(result, false);
+    }
+
+    /**
+     * Test of checkForSpace method when hitting boundary
+     */
+    @Test
+    public void testCheckForSpaceFalse2() {
+       Tetromino piece= new Tetromino(0);
+       Board instance = new Board();
+       instance.setPx(1);
+       instance.drawTetromino(piece);
+       boolean result=instance.checkForSpace(piece, piece.getTetromino(), instance.getPx()-1, instance.getPy());
+       assertEquals(result, false);
+    }
+    /*
+     * Test of checkForSpace method when having space
+     */
+    @Test
+    public void testCheckForSpaceTrue() {
+       Tetromino piece= new Tetromino();
+       Board instance = new Board();
+       boolean result=instance.checkForSpace(piece, piece.getTetromino(), instance.getPx(), instance.getPy()+1);
+       assertEquals(result, true);
+    }  
+    
     /**
      * Test of printBoard method
      */
