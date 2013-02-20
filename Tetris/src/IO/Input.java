@@ -6,14 +6,16 @@ package IO;
  * @author SampaX
  */
 
-import java.util.Scanner;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyAdapter;
 
-public class Input {
-    private static Scanner scanner;
-    
-    public Input() {
-        scanner=new Scanner(System.in);
+public class Input extends KeyAdapter{
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        int keys = e.getKeyCode();
+        if (keys == KeyEvent.VK_DOWN)
+            gameLogic.Tetris.stepDown();
     }
-    
     
 }
