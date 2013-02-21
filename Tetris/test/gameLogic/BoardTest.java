@@ -79,9 +79,9 @@ public class BoardTest {
      */
     @Test
     public void testDrawTetromino() {
-        Tetromino piece = new Tetromino(0);
         Board instance = new Board();
-        instance.markTetromino(piece);
+        instance.piece = new Tetromino(0);
+        instance.markTetromino();
         int[][] expResult = {
             {9,0,0,0,0,1,0,0,0,0,0,9},
             {9,0,0,0,0,1,0,0,0,0,0,9},
@@ -105,6 +105,7 @@ public class BoardTest {
             {9,0,0,0,0,0,0,0,0,0,0,9},
             {9,9,9,9,9,9,9,9,9,9,9,9}
         };
+        System.out.println(instance.printBoard());
         assertArrayEquals(expResult, instance.getBoard());
     }
 
@@ -115,8 +116,8 @@ public class BoardTest {
     public void testScrubTetromino() {
         Tetromino piece = new Tetromino(0);
         Board instance = new Board();
-        instance.markTetromino(piece);
-        instance.scrubTetromino(piece);
+        instance.markTetromino();
+        instance.scrubTetromino();
         int[][] expResult = {
             {9,0,0,0,0,0,0,0,0,0,0,9},
             {9,0,0,0,0,0,0,0,0,0,0,9},
@@ -151,10 +152,10 @@ public class BoardTest {
        Tetromino piece= new Tetromino(1);
        Board instance = new Board();
        instance.setPy(3);
-       instance.markTetromino(piece);
+       instance.markTetromino();
        instance.setPy(1);
-       instance.markTetromino(piece);
-       boolean result=instance.checkForSpace(piece, piece.getTetromino(), instance.getPx(), instance.getPy()+1);
+       instance.markTetromino();
+       boolean result=instance.checkForSpace(piece.getTetromino(), instance.getPx(), instance.getPy()+1);
        assertEquals(result, false);
     }
 
@@ -166,8 +167,8 @@ public class BoardTest {
        Tetromino piece= new Tetromino(0);
        Board instance = new Board();
        instance.setPx(1);
-       instance.markTetromino(piece);
-       boolean result=instance.checkForSpace(piece, piece.getTetromino(), instance.getPx()-1, instance.getPy());
+       instance.markTetromino();
+       boolean result=instance.checkForSpace(piece.getTetromino(), instance.getPx()-1, instance.getPy());
        assertEquals(result, false);
     }
     /*
@@ -177,7 +178,7 @@ public class BoardTest {
     public void testCheckForSpaceTrue() {
        Tetromino piece= new Tetromino();
        Board instance = new Board();
-       boolean result=instance.checkForSpace(piece, piece.getTetromino(), instance.getPx(), instance.getPy()+1);
+       boolean result=instance.checkForSpace(piece.getTetromino(), instance.getPx(), instance.getPy()+1);
        assertEquals(result, true);
     }  
     
@@ -189,7 +190,7 @@ public class BoardTest {
        Tetromino piece= new Tetromino(1);
        Tetromino expResult = new Tetromino(1);
        Board instance = new Board();
-       piece=instance.moveDown(piece);
+       piece=instance.moveDown();
        assertArrayEquals(expResult.getTetromino(),piece.getTetromino());
     }
 

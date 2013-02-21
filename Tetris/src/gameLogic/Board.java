@@ -11,6 +11,7 @@ import javax.swing.JPanel;
  */
 public class Board extends JPanel{
     
+    public static Tetromino piece;    
     private static int board[][];
     private static int py;
     private static int px;
@@ -23,29 +24,32 @@ public class Board extends JPanel{
         for(int i=0;i<12;i++)
             board[20][i]=9;
         py=1;
-        px=5;
+        px=4;
+        piece = new Tetromino();
     }
     
     @Override
     public void paint(Graphics g) {
         super.paint(g);
-        drawTetromino(g,0,0);
-        drawTetromino(g,2,0);        
+        for (int y=0; y<20; y++) {
+            for (int x=1; x<11; x++) {
+                if (board[y][x]!=0) {
+                    g.setColor(Color.black);
+                    g.fillRect(x*20, y*20, 20, 20);
+                    g.setColor(new Color((board[y][x])*500+1));
+                    g.fillRect(20*x+1, 20*y+1, 18, 18);                     
+                }
+            }
+        }
     }
     
-    public void drawSquare(Graphics g, int px, int py) {
-        g.setColor(Color.red);
-        g.fillRect(px*20, py*20, 20, 20);
-        g.setColor(Color.black);
-        g.fillRect(20*px+1, 20*py+1, 18, 18);        
-    }
     
-    public void drawTetromino(Graphics g, int px, int py) {
-        drawSquare(g, px+0, py+0);
-        drawSquare(g, px+0, py+1);
-        drawSquare(g, px+1, py+0);
-        drawSquare(g, px+2, py+0);         
-    }
+    public void eraseSquare(Graphics g, int px,int py) {
+        board[px][py] = 0;
+        g.setColor(java.awt.Color.white);
+        g.fillRect(px*20,py*20,20,20);
+  }
+    
     public int[][] getBoard() {
         return board;
     }
@@ -64,45 +68,48 @@ public class Board extends JPanel{
         px=value;
     }
 
-    public void markTetromino(Tetromino piece) {
+    public void markTetromino() {
         int[][] temp=piece.getTetromino();
         int style = piece.getStyle();
         
         if(style == 7)
             return;
         for(int i=0; i<4;i++) {
-            board[py+temp[i][1]][px+temp[i][0]]=1;
+            board[py+temp[i][1]][px+temp[i][0]]=style;
         }
     }
     
-    public void scrubTetromino(Tetromino piece) {
+    public void scrubTetromino() {
         int[][] temp=piece.getTetromino();
         for(int i=0; i<4;i++) 
             board[py+temp[i][1]][px+temp[i][0]]=0;        
     }
 
-    public boolean checkForSpace(Tetromino piece, int [][] newPoints, int pointerX, int pointerY) {
+    public boolean checkForSpace(int [][] newPoints, int pointerX, int pointerY) {
         boolean result=true;
-        scrubTetromino(piece);
+        scrubTetromino();
         for(int i=0; i<4;i++) {
             if(board[pointerY+newPoints[i][1]][pointerX+newPoints[i][0]]!=0)
                 result=false;
         }
-        markTetromino(piece);
+        markTetromino();
         return result;
     }
     
-    public Tetromino moveDown(Tetromino piece) {
+    public Tetromino moveDown() {
         if(piece==null)
             return piece;
-        if(this.checkForSpace(piece, piece.getTetromino(), px, py+1)) {
-            scrubTetromino(piece);
+        if(this.checkForSpace(piece.getTetromino(), px, py+1)) {
+            scrubTetromino();
             py++;            
-            markTetromino(piece);
+            markTetromino();
+            repaint();
             return piece;
         }
-        else
+        else {
+            repaint();
             return releaseTetromino();
+        }
     }
     
     public String printBoard(){ //returns the visible portion of the board as a String
@@ -117,8 +124,22 @@ public class Board extends JPanel{
 
     private Tetromino releaseTetromino() {
         py=1;
-        px=5;
-        return new Tetromino();
+        px=4;
+        piece=new Tetromino();
+        checkGameOver();
+        return piece;
+    }
+
+    private void gameOver() {
+        System.exit(0);
+    }
+
+    private void checkGameOver() {
+        int[][] newPoints = piece.getTetromino();
+        for(int i=0; i<4;i++) {
+            if(board[py+newPoints[i][1]][px+newPoints[i][0]]!=0)
+                gameOver();
+        }        
     }
     
 }
