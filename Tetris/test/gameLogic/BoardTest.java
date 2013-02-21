@@ -75,13 +75,13 @@ public class BoardTest {
 
 
     /**
-     * Test of drawTetromino method
+     * Test of markTetromino method
      */
     @Test
     public void testDrawTetromino() {
         Tetromino piece = new Tetromino(0);
         Board instance = new Board();
-        instance.drawTetromino(piece);
+        instance.markTetromino(piece);
         int[][] expResult = {
             {9,0,0,0,0,1,0,0,0,0,0,9},
             {9,0,0,0,0,1,0,0,0,0,0,9},
@@ -115,7 +115,7 @@ public class BoardTest {
     public void testScrubTetromino() {
         Tetromino piece = new Tetromino(0);
         Board instance = new Board();
-        instance.drawTetromino(piece);
+        instance.markTetromino(piece);
         instance.scrubTetromino(piece);
         int[][] expResult = {
             {9,0,0,0,0,0,0,0,0,0,0,9},
@@ -151,9 +151,9 @@ public class BoardTest {
        Tetromino piece= new Tetromino(1);
        Board instance = new Board();
        instance.setPy(3);
-       instance.drawTetromino(piece);
+       instance.markTetromino(piece);
        instance.setPy(1);
-       instance.drawTetromino(piece);
+       instance.markTetromino(piece);
        boolean result=instance.checkForSpace(piece, piece.getTetromino(), instance.getPx(), instance.getPy()+1);
        assertEquals(result, false);
     }
@@ -166,7 +166,7 @@ public class BoardTest {
        Tetromino piece= new Tetromino(0);
        Board instance = new Board();
        instance.setPx(1);
-       instance.drawTetromino(piece);
+       instance.markTetromino(piece);
        boolean result=instance.checkForSpace(piece, piece.getTetromino(), instance.getPx()-1, instance.getPy());
        assertEquals(result, false);
     }
