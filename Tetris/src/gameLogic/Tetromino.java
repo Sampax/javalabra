@@ -15,7 +15,7 @@ public class Tetromino {
     private int[][][] tetrominoArrays =
         //an array contains the coordinates of the four tetromino segments in relation to a pointer square 
         // line (0)
-        {null,
+        {{{0, 0}, {0, 1}, {0, 2}, {0, -1}},
         // square (1)
         {{0, 0}, {0, 1}, {1, 0}, {1, 1}},
         //S (2)
@@ -29,7 +29,7 @@ public class Tetromino {
         //J (6)
         {{0, 0}, {0, -1}, {0, 1}, {-1, -1}},
         //empty piece (7)
-        {{0, 0}, {0, 1}, {0, 2}, {0, -1}}};
+        null};
             
     public Tetromino() {
         tetromino=new int[4][2];
