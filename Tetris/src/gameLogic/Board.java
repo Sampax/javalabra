@@ -35,9 +35,9 @@ public class Board extends JPanel{
             for (int x=1; x<11; x++) {
                 if (board[y][x]!=0) {
                     g.setColor(Color.black);
-                    g.fillRect(x*20, y*20, 20, 20);
+                    g.fillRect((x-1)*20, y*20, 20, 20);
                     g.setColor(new Color((board[y][x])*500+1));
-                    g.fillRect(20*x+1, 20*y+1, 18, 18);                     
+                    g.fillRect(20*(x-1)+1, 20*y+1, 18, 18);                     
                 }
             }
         }
@@ -90,6 +90,10 @@ public class Board extends JPanel{
         scrubTetromino();
         for(int i=0; i<4;i++) {
             if(board[pointerY+newPoints[i][1]][pointerX+newPoints[i][0]]!=0)
+                   /* || pointerY+newPoints[i][1] < 0
+                    || pointerY+newPoints[i][1] > 19
+                    || pointerX+newPoints[i][0] < 0
+                    || pointerY+newPoints[i][0] > 9)*/
                 result=false;
         }
         markTetromino();
@@ -111,7 +115,43 @@ public class Board extends JPanel{
             return releaseTetromino();
         }
     }
+
+    public Tetromino moveLeft() {
+        if(piece==null)
+            return piece;
+        if(this.checkForSpace(piece.getTetromino(), px-1, py)) {
+            scrubTetromino();
+            px--;            
+            markTetromino();
+            repaint();
+            return piece;
+        }
+        else
+            return piece;
+    }    
     
+    public Tetromino moveRight() {
+        if(piece==null)
+            return piece;
+        if(this.checkForSpace(piece.getTetromino(), px+1, py)) {
+            scrubTetromino();
+            px++;            
+            markTetromino();
+            repaint();
+            return piece;
+        }
+        else
+            return piece;
+    
+    }
+    public void rotate() {
+        if(this.checkForSpace(piece.nextRotation(), px, py)){
+            scrubTetromino();
+            piece.rotate();
+            markTetromino();
+            repaint();
+        }
+    }
     public String printBoard(){ //returns the visible portion of the board as a String
         String result="";
         for(int i=0;i<20;i++) {
@@ -123,6 +163,7 @@ public class Board extends JPanel{
     }
 
     private Tetromino releaseTetromino() {
+        checkLines();
         py=1;
         px=4;
         piece=new Tetromino();
@@ -140,6 +181,45 @@ public class Board extends JPanel{
             if(board[py+newPoints[i][1]][px+newPoints[i][0]]!=0)
                 gameOver();
         }        
+    }
+
+    private void checkLines() {
+        int[] cleared= new int [4];
+        int index=0;
+        for (int i=0; i<20; i++) {
+            for (int j=1; j<11; j++) {
+                if(board[i][j]==0)
+                    break;
+                if(j==10) {
+                    cleared[index]=i;
+                    index++;
+                }
+            }
+        }
+        clearLines(cleared);
+    }
+
+    private void clearLines(int[] cleared) {
+        for(int i=0; i<4; i++) {
+            if(cleared[i]!=0) {
+                for(int j=1;j<11;j++) {
+                    board[cleared[i]][j]=0;
+                }
+            }
+        }
+        repaint();
+        dropRows(cleared);
+    }
+
+    private void dropRows(int[] cleared) {
+        for(int i=0;i<4;i++) {
+            if(cleared[i]!=0) {
+                for(int j=1;j<11;j++) {
+                    board[cleared[i]][j]=board[cleared[i]-1][j];
+                }
+            }
+        }
+        repaint();
     }
     
 }

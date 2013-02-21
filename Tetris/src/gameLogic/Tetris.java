@@ -26,11 +26,23 @@ public class Tetris extends GameLoop implements ActionListener {
 
     public static void main(String[] args) {
         Tetris tetris = new Tetris();
-        tetris.run(0.3);
+        tetris.run(1.3);
     }
     
     public static void stepDown() {
         board.moveDown();
+    }
+
+    public static void stepLeft() {
+        board.moveLeft();
+    }
+
+    public static void stepRight() {
+        board.moveRight();
+    }
+
+    public static void rotate() {
+        board.rotate();
     }
 
 
@@ -45,6 +57,7 @@ public class Tetris extends GameLoop implements ActionListener {
         window.setSize(200, 400);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.add(board);
+        window.addKeyListener(input);
         window.pack();
         window.setVisible(true);
 
@@ -68,6 +81,7 @@ public class Tetris extends GameLoop implements ActionListener {
     
     @Override
     public void actionPerformed(ActionEvent e) {
+        board.repaint();
         draw();
     }
 
