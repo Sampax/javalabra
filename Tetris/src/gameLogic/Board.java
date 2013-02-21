@@ -214,8 +214,10 @@ public class Board extends JPanel{
     private void dropRows(int[] cleared) {
         for(int i=0;i<4;i++) {
             if(cleared[i]!=0) {
-                for(int j=1;j<11;j++) {
-                    board[cleared[i]][j]=board[cleared[i]-1][j];
+                for(int j=cleared[i]; j>0; j-- ) {
+                    for(int k=1;k<11;k++) {
+                        board[j][k]=board[j-1][k];
+                    }
                 }
             }
         }
