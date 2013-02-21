@@ -212,8 +212,10 @@ public class Board extends JPanel{
     }
 
     private void dropRows(int[] cleared) {
+        int completedLines=0;
         for(int i=0;i<4;i++) {
             if(cleared[i]!=0) {
+                completedLines++;
                 for(int j=cleared[i]; j>0; j-- ) {
                     for(int k=1;k<11;k++) {
                         board[j][k]=board[j-1][k];
@@ -221,6 +223,7 @@ public class Board extends JPanel{
                 }
             }
         }
+        infoPanel.incrementLines(completedLines);
         repaint();
     }
     

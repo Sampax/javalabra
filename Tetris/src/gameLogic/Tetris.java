@@ -11,14 +11,12 @@ import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import java.awt.Color;
 import java.awt.Container;
-import java.awt.Graphics;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Tetris extends GameLoop implements ActionListener {
 
     public static Board board;
+    public static infoPanel console;
     public static IO.Input input;
     public static JFrame window;
     public static JPanel grid;
@@ -50,13 +48,15 @@ public class Tetris extends GameLoop implements ActionListener {
     @Override
     public void startup() {
         board= new Board();
+        console= new infoPanel();
         board.setBackground(Color.white);
         board.markTetromino();
         input = new IO.Input();
         window = new JFrame ("Tetris");
-        window.setSize(200, 400);
+        window.setSize(300, 400);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.add(board);
+        window.add(board, BorderLayout.WEST);
+        window.add(console, BorderLayout.EAST);
         window.addKeyListener(input);
         window.pack();
         window.setVisible(true);
@@ -76,7 +76,8 @@ public class Tetris extends GameLoop implements ActionListener {
     @Override
     public void draw() {
 
-//        System.out.println(board.printBoard()); 
+        board.repaint();
+        console.repaint();
     }
     
     @Override
