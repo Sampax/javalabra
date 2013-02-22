@@ -108,12 +108,7 @@ public class Tetris extends GameLoop implements ActionListener {
         console.getNextStyle();
     }
     
-    /**
-     * repaints the board
-     * 
-     * @see gameLogic.Board#paint() 
-     * @see gameLogic.infoPanel#paint() 
-     */
+
     @Override
     public void draw() {
 

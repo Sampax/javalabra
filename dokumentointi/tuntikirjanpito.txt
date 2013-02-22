@@ -10,3 +10,18 @@
 29.1.2013
 -4h: tetrominon pyörittely, gameloopin alustusta
 
+20.2.2013
+-8h: grafiikkaa ja gameloop valmiiksi
+
+21.2.2013
+-12h:grafiikkaa, rivien poisto, Input, pisteytys
+
+22..2.2013
+-3h:testejä, viilausta, kommentointia
+
+
+Loppuaatteita:
+
+Projektivalintani oli mielestäni onnistunut, Tetristä oli sen tutusta toiminnallisuudesta huolimatta mielenkiintoista ja haastavaa(kin) toteuttaa. Lopulta projektini jäi hieman torsoksi, sillä en alunperin osannut budjetoida sille tarpeeksi aikaa, enkä asian huomattuani oikein voinut irtautua muista sovituista hommista. Jos alottaisin nyt, kiinnittäisin varmaankin huomattavasti enemmän huomiota dokumentointiin ja ohjelman rakenteen suunnitteluun. Nykytoteutus on sanalla sanoen rönsyilevä ja sisältää paljon turhia päällekkäisyyksiä ja luokkien välisiä ristiinriippuvuuksia.
+
+Valmiista ohjelmasta puuttumaan jääneet ominaisuudet: valikot, gameover -ruutu, pisteiden tallennus, esteettisesti miellyttävä ulkoasu

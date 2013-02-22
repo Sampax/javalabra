@@ -1,0 +1,17 @@
+Tetris
+
+Run the game by double-clicking the jar found in javalabra/Tetris/build. Note that there are no beginning or end screens, the game is immediately running after startup, and the game exits automatically after a game over.
+
+
+Object:
+The object of the game is to keep going as long as you can by arranging the constantly falling tetrominoes so that they fill entire rows of the game area. Once a row is filled it is removed, freeing up more space on the board. If a new piece no longer has space to appear at the top of the game area (i.e. is obstructed by previous blocks), the game is over. There is also a counter to the right of the game area showing you how many lines you've cleared in the current session.
+
+Controls:
+
+The game is controlled with the arrow keys
+Up - rotate piece
+Left - move piece to the left
+Right - move piece to the right
+Down - move piece one step down
+
+Note that pressing and holding a key will repeat the action until the key is released

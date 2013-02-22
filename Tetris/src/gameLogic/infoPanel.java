@@ -16,6 +16,9 @@ public class infoPanel extends JPanel {
     private static int lines;
     private static int[][] nextPiece;
     
+    /**
+     * constructor for the infoPanel that displays a player's score and next piece in the queue
+     */
     public infoPanel() {
         this.setPreferredSize(new Dimension(100,400));
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -33,6 +36,10 @@ public class infoPanel extends JPanel {
         nextPiece=Tetromino.getTetromino(Board.getNextStyle());
     }
     
+    /**
+     * paints the console 
+     * @param g the graphics tool used
+     */
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -44,6 +51,10 @@ public class infoPanel extends JPanel {
     }
     
  
+    /**
+     * increments the player's current score
+     * @param increment the amount of points to increment by
+     */
     public static void incrementLines(int increment) {
         lines+=increment;
     }

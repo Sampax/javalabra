@@ -9,7 +9,6 @@ import java.util.Random;
 public class Tetromino {
     
     private int[][] tetromino;
-    private int direction;
     private int style;
     private Random styleRandomizer=new Random();
     private static int[][][] tetrominoArrays =
@@ -21,7 +20,7 @@ public class Tetromino {
         //S (2)
         {{0, 0}, {1, 0}, {1, 1}, {0, -1}},
         //Z (3)
-        {{0, 0}, {-1, 0}, {-1, -1}, {0, 1}},
+        {{0, 0}, {1, 0}, {0, 1}, {1, -1}},
         //T (4)
         {{0, 0}, {1, 0}, {0, 1}, {-1, 0}},
         //L (5)
@@ -36,7 +35,6 @@ public class Tetromino {
      */
     public Tetromino() {
         tetromino=new int[4][2];
-        direction=0;
         style=randomStyle();
         tetromino=tetrominoArrays[style];
     }
@@ -47,7 +45,6 @@ public class Tetromino {
      */
     public Tetromino(int style) {
         tetromino=new int[4][2];
-        direction=0;
         this.style=style;
         tetromino=tetrominoArrays[this.style];
     }
