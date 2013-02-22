@@ -19,6 +19,12 @@ public class Board extends JPanel{
     private static int px;
     private static Random random = new Random();
     
+    /**
+     * Constructor for gameboard, sets up an array and initial pointer position.
+     * Also sets up the first tetromino
+     * 
+     * @see gameLogic.Tetromino#Tetromino() 
+     */
     public Board() {
         this.setPreferredSize(new Dimension(200,400));
         board = new int[21][12];
@@ -32,6 +38,11 @@ public class Board extends JPanel{
         nextPiece = random.nextInt(7);
     }
     
+    /**
+     * paints the gameboard and its contents
+     * 
+     * @param g the graphics tool used
+     */
     @Override
     public void paint(Graphics g) {
         super.paint(g);
@@ -47,12 +58,6 @@ public class Board extends JPanel{
         }
     }
     
-    
-    public void eraseSquare(Graphics g, int px,int py) {
-        board[px][py] = 0;
-        g.setColor(java.awt.Color.white);
-        g.fillRect(px*20,py*20,20,20);
-  }
     
     public int[][] getBoard() {
         return board;
@@ -75,7 +80,11 @@ public class Board extends JPanel{
     public static int getNextStyle() {
         return nextPiece;
     }
-    
+
+    /**
+     * Marks the active tetromino onto the gameboard.
+     * The new position is not yet painted.
+     */
     public void markTetromino() {
         int[][] temp=piece.getTetromino();
         int style = piece.getStyle();
@@ -87,12 +96,23 @@ public class Board extends JPanel{
         }
     }
     
+    /**
+     * Erases the active tetromino from the gameboard
+     */
     public void scrubTetromino() {
         int[][] temp=piece.getTetromino();
         for(int i=0; i<4;i++) 
             board[py+temp[i][1]][px+temp[i][0]]=0;        
     }
 
+    /**
+     * Checks if the gameboard has enough space for the current tetromino
+     * 
+     * @param newPoints coordinates for the tetromino to check against
+     * @param pointerX  x-axis pointer for the space to check
+     * @param pointerY  y-axis pointer for the space to check
+     * @return boolean value indicating whether there is space or not
+     */
     public boolean checkForSpace(int [][] newPoints, int pointerX, int pointerY) {
         boolean result=true;
         scrubTetromino();
@@ -104,6 +124,12 @@ public class Board extends JPanel{
         return result;
     }
     
+    /**
+     * moves the active tetromino down one space
+     * @return the active tetromino or a new one through releaseTetromino, if the piece can no longer move
+     * 
+     * @see gameLogic.Board#releaseTetromino() 
+     */
     public Tetromino moveDown() {
         if(piece==null)
             return piece;
@@ -120,6 +146,10 @@ public class Board extends JPanel{
         }
     }
 
+    /**
+     * moves the active tetromino one space to the left
+     * @return the active tetromino
+     */
     public Tetromino moveLeft() {
         if(piece==null)
             return piece;
@@ -134,6 +164,10 @@ public class Board extends JPanel{
             return piece;
     }    
     
+    /**
+     * moves the active tetromino one space to the right
+     * @return the active tetromino
+     */
     public Tetromino moveRight() {
         if(piece==null)
             return piece;
@@ -148,6 +182,13 @@ public class Board extends JPanel{
             return piece;
     
     }
+    
+    /**
+     * rotates the active tetromino if there is space
+     * 
+     * @see gameLogic.Tetromino#nextRotation() 
+     * @see gameLogic.Tetromino#rotate() 
+     */
     public void rotate() {
         if(this.checkForSpace(piece.nextRotation(), px, py)){
             scrubTetromino();
@@ -156,7 +197,12 @@ public class Board extends JPanel{
             repaint();
         }
     }
-    public String printBoard(){ //returns the visible portion of the board as a String
+    
+    /**
+     * returns the boardarray as a String, used for early visualization and testing
+     * @return the contents of the gameboard as a String
+     */
+    public String printBoard(){
         String result="";
         for(int i=0;i<20;i++) {
             for(int j=1;j<11;j++)
@@ -166,6 +212,13 @@ public class Board extends JPanel{
         return result;
     }
 
+    /**
+     * releases the active tetromino and creates a new one
+     * @return the new active tetromino
+     * 
+     * @see gameLogic.Tetromino#Tetromino(int) 
+     * @see gameLogic.Board#checkLines() 
+     */
     private Tetromino releaseTetromino() {
         checkLines();
         py=1;
@@ -176,10 +229,19 @@ public class Board extends JPanel{
         return piece;
     }
 
+    /**
+     * closes the game. Bad implementation, needs changing
+     */
     private void gameOver() {
         System.exit(0);
     }
 
+    /**
+     * checks if newly generated tetromino can fit in its starting position.
+     * Calls gameOver if tetromino does not fit
+     * 
+     * @see gameLogic.Board#gameOver() 
+     */
     private void checkGameOver() {
         int[][] newPoints = piece.getTetromino();
         for(int i=0; i<4;i++) {
@@ -188,6 +250,12 @@ public class Board extends JPanel{
         }        
     }
 
+    /**
+     * checks for completed lines, called after releasing a tetromino.
+     * After completed lines are found, clearLines() is called
+     * 
+     * @see gameLogic.Board#clearLines(int[]) 
+     */
     private void checkLines() {
         int[] cleared= new int [4];
         int index=0;
@@ -204,6 +272,13 @@ public class Board extends JPanel{
         clearLines(cleared);
     }
 
+    /**
+     * clears all completed lines from the gameboard
+     * 
+     * @param cleared an array containing the indices of cleared rows
+     * 
+     * @see gameLogic.Board#dropRows(int[]) 
+     */
     private void clearLines(int[] cleared) {
         for(int i=0; i<4; i++) {
             if(cleared[i]!=0) {
@@ -216,6 +291,13 @@ public class Board extends JPanel{
         dropRows(cleared);
     }
 
+    /**
+     * drops the block rows down to fill any empty rows left after clearing lines
+     * 
+     * @param cleared an array containing the indices of cleared rows
+     * 
+     * @see gameLogic.infoPanel#incrementLines(int) 
+     */
     private void dropRows(int[] cleared) {
         int completedLines=0;
         for(int i=0;i<4;i++) {

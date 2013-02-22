@@ -30,7 +30,10 @@ public class Tetromino {
         {{0, 0}, {0, -1}, {0, 1}, {-1, -1}},
         //empty piece (7)
         null};
-            
+  
+    /**
+     * constructor for creating a new random tetromino
+     */
     public Tetromino() {
         tetromino=new int[4][2];
         direction=0;
@@ -38,6 +41,10 @@ public class Tetromino {
         tetromino=tetrominoArrays[style];
     }
 
+    /**
+     * constructor for creating a new tetromino with predefined style
+     * @param style the desired style as an int
+     */
     public Tetromino(int style) {
         tetromino=new int[4][2];
         direction=0;
@@ -45,10 +52,19 @@ public class Tetromino {
         tetromino=tetrominoArrays[this.style];
     }
     
+    /**
+     * updates the active tetrominoarray to reflect its state after a single rotation
+     * 
+     * @see gameLogic.Tetromino#nextRotation() 
+     */
     public void rotate() {
         this.tetromino=this.nextRotation();
     }
     
+    /**
+     * method for getting the array corresponding to the next rotation of the active tetromino
+     * @return an array with the new coordinates for the rotated tetromino
+     */
     public int[][] nextRotation() {
         if (this.style==1)
             return this.tetromino;

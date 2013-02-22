@@ -1,7 +1,4 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package gameLogic;
 
 /**
@@ -14,6 +11,10 @@ public abstract class GameLoop
     private boolean running = false;
  
 
+    /**
+     * Determines the passing of in-game time, essentially the game lives in the loop for its duration
+     * @param timeStep the amount of time in seconds between gametime updates
+     */
     public void run(double timeStep)
     {
         running = true;
@@ -61,13 +62,31 @@ public abstract class GameLoop
         shutdown();
     }
  
+    /**
+     * stops the execution of the gameLoop
+     */
     public void stop()
     {
         running = false;
     }
- 
+
+    /**
+     * abstract method to be implemented by the main class to start the game
+     */
     public abstract void startup();
+    
+    /**
+     * abstract method to be implemented by the main class to shut the game down
+     */
     public abstract void shutdown();
+    
+    /**
+     * abstract method to be implemented by the main class to update the gamestate
+     */
     public abstract void update();
+    
+    /**
+     * abstract method to be implemented by the main class to draw graphics
+     */
     public abstract void draw();
 }

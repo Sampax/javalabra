@@ -27,24 +27,51 @@ public class Tetris extends GameLoop implements ActionListener {
         tetris.run(1.3);
     }
     
+    /**
+     * calls the moveDown method from gameLogic.Board
+     * 
+     * @see gameLogic.Board#moveDown() 
+     */
     public static void stepDown() {
         board.moveDown();
     }
 
+    /**
+     * calls the moveLeft method from gameLogic.Board
+     * 
+     * @see gameLogic.Board#moveLeft() 
+     */
     public static void stepLeft() {
         board.moveLeft();
     }
 
+    /**
+     * calls the moveRight method from gameLogic.Board
+     * 
+     * @see gameLogic.Board#moveRight() 
+     */
     public static void stepRight() {
         board.moveRight();
     }
 
+    /**
+     * calls the rotate method from gameLogic.Board
+     * 
+     * @see gameLogic.Board#rotate() 
+     */
     public static void rotate() {
         board.rotate();
     }
 
 
-    
+    /**
+     * 
+     * Starts the game up
+     * 
+     * @see gameLogic.Board#Board()
+     * @see gameLogic.infoPanel#infoPanel() 
+     * 
+     */
     @Override
     public void startup() {
         board= new Board();
@@ -62,18 +89,31 @@ public class Tetris extends GameLoop implements ActionListener {
         window.setVisible(true);
 
     }
-    
+ 
+
     @Override
     public void shutdown() {
-        return;
+        stop();
     }
-    
+
+    /**
+     * moves the game forward by updating the board and console views
+     * 
+     * @see gameLogic.Board#moveDown() 
+     * @see gameLogic.infoPanel#getNextStyle() 
+     */
     @Override
     public void update() {
         board.moveDown();
         console.getNextStyle();
     }
     
+    /**
+     * repaints the board
+     * 
+     * @see gameLogic.Board#paint() 
+     * @see gameLogic.infoPanel#paint() 
+     */
     @Override
     public void draw() {
 
@@ -81,6 +121,12 @@ public class Tetris extends GameLoop implements ActionListener {
         console.repaint();
     }
     
+    /**
+     * invoked after receiving input from player
+     * @param e keyEvent as received by Input object
+     * 
+     * @see IO.Input
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         board.repaint();
