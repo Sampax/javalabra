@@ -3,6 +3,7 @@ package gameLogic;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.Random;
 import javax.swing.JPanel;
 
 /**
@@ -11,10 +12,12 @@ import javax.swing.JPanel;
  */
 public class Board extends JPanel{
     
-    public static Tetromino piece;    
+    public static Tetromino piece;
+    public static int nextPiece;
     private static int board[][];
     private static int py;
     private static int px;
+    private static Random random = new Random();
     
     public Board() {
         this.setPreferredSize(new Dimension(200,400));
@@ -26,6 +29,7 @@ public class Board extends JPanel{
         py=1;
         px=4;
         piece = new Tetromino();
+        nextPiece = random.nextInt(7);
     }
     
     @Override
@@ -68,6 +72,10 @@ public class Board extends JPanel{
         px=value;
     }
 
+    public static int getNextStyle() {
+        return nextPiece;
+    }
+    
     public void markTetromino() {
         int[][] temp=piece.getTetromino();
         int style = piece.getStyle();
@@ -75,7 +83,7 @@ public class Board extends JPanel{
         if(style == 7)
             return;
         for(int i=0; i<4;i++) {
-            board[py+temp[i][1]][px+temp[i][0]]=style;
+            board[py+temp[i][1]][px+temp[i][0]]=style+1;
         }
     }
     
@@ -90,10 +98,6 @@ public class Board extends JPanel{
         scrubTetromino();
         for(int i=0; i<4;i++) {
             if(board[pointerY+newPoints[i][1]][pointerX+newPoints[i][0]]!=0)
-                   /* || pointerY+newPoints[i][1] < 0
-                    || pointerY+newPoints[i][1] > 19
-                    || pointerX+newPoints[i][0] < 0
-                    || pointerY+newPoints[i][0] > 9)*/
                 result=false;
         }
         markTetromino();
@@ -166,7 +170,8 @@ public class Board extends JPanel{
         checkLines();
         py=1;
         px=4;
-        piece=new Tetromino();
+        piece=new Tetromino(nextPiece);
+        nextPiece=random.nextInt(7);
         checkGameOver();
         return piece;
     }

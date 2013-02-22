@@ -12,7 +12,7 @@ public class Tetromino {
     private int direction;
     private int style;
     private Random styleRandomizer=new Random();
-    private int[][][] tetrominoArrays =
+    private static int[][][] tetrominoArrays =
         //an array contains the coordinates of the four tetromino segments in relation to a pointer square 
         // line (0)
         {{{0, 0}, {0, 1}, {0, 2}, {0, -1}},
@@ -62,6 +62,10 @@ public class Tetromino {
     
     public int[][] getTetromino() {
         return tetromino;
+    }
+    
+    public static int[][] getTetromino(int style) {
+        return tetrominoArrays[style];
     }
 
     public int getStyle() {

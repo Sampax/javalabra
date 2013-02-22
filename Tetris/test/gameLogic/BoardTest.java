@@ -80,13 +80,13 @@ public class BoardTest {
     @Test
     public void testDrawTetromino() {
         Board instance = new Board();
-        instance.piece = new Tetromino(0);
+        Board.piece = new Tetromino(0);
         instance.markTetromino();
         int[][] expResult = {
-            {9,0,0,0,0,1,0,0,0,0,0,9},
-            {9,0,0,0,0,1,0,0,0,0,0,9},
-            {9,0,0,0,0,1,0,0,0,0,0,9},
-            {9,0,0,0,0,1,0,0,0,0,0,9},
+            {9,0,0,0,1,0,0,0,0,0,0,9},
+            {9,0,0,0,1,0,0,0,0,0,0,9},
+            {9,0,0,0,1,0,0,0,0,0,0,9},
+            {9,0,0,0,1,0,0,0,0,0,0,9},
             {9,0,0,0,0,0,0,0,0,0,0,9},
             {9,0,0,0,0,0,0,0,0,0,0,9},
             {9,0,0,0,0,0,0,0,0,0,0,9},
@@ -114,7 +114,6 @@ public class BoardTest {
      */
     @Test
     public void testScrubTetromino() {
-        Tetromino piece = new Tetromino(0);
         Board instance = new Board();
         instance.markTetromino();
         instance.scrubTetromino();
@@ -149,13 +148,13 @@ public class BoardTest {
      */
     @Test
     public void testCheckForSpaceFalse1() {
-       Tetromino piece= new Tetromino(1);
        Board instance = new Board();
+       Board.piece = new Tetromino(1);
        instance.setPy(3);
        instance.markTetromino();
        instance.setPy(1);
        instance.markTetromino();
-       boolean result=instance.checkForSpace(piece.getTetromino(), instance.getPx(), instance.getPy()+1);
+       boolean result=instance.checkForSpace(Board.piece.getTetromino(), instance.getPx(), instance.getPy()+1);
        assertEquals(result, false);
     }
 
@@ -187,14 +186,181 @@ public class BoardTest {
      */
     @Test
     public void testMoveDown1() {
-       Tetromino piece= new Tetromino(1);
-       Tetromino expResult = new Tetromino(1);
        Board instance = new Board();
-       piece=instance.moveDown();
-       assertArrayEquals(expResult.getTetromino(),piece.getTetromino());
+       Board.piece= new Tetromino(0);
+       instance.markTetromino();
+       int[][] expResult = {
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,1,0,0,0,0,0,0,9},
+            {9,0,0,0,1,0,0,0,0,0,0,9},
+            {9,0,0,0,1,0,0,0,0,0,0,9},
+            {9,0,0,0,1,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,9,9,9,9,9,9,9,9,9,9,9}
+        };
+
+       Board.piece=instance.moveDown();
+       assertArrayEquals(expResult,instance.getBoard());
     }
 
+    /*
+     * Test of correct return on moveLeft method when space available
+     */
+    @Test
+    public void testMoveLeft1() {
+       Board instance = new Board();
+       Board.piece= new Tetromino(0);
+       instance.markTetromino();
+       int[][] expResult = {
+            {9,0,0,1,0,0,0,0,0,0,0,9},
+            {9,0,0,1,0,0,0,0,0,0,0,9},
+            {9,0,0,1,0,0,0,0,0,0,0,9},
+            {9,0,0,1,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,9,9,9,9,9,9,9,9,9,9,9}
+        };
 
+       Board.piece=instance.moveLeft();
+       assertArrayEquals(expResult,instance.getBoard());
+    }
+
+        /*
+     * Test of correct return on moveLeft method when space no longer available
+     */
+    @Test
+    public void testMoveLeft2() {
+       Board instance = new Board();
+       Board.piece= new Tetromino(0);
+       instance.markTetromino();
+       int[][] expResult = {
+            {9,1,0,0,0,0,0,0,0,0,0,9},
+            {9,1,0,0,0,0,0,0,0,0,0,9},
+            {9,1,0,0,0,0,0,0,0,0,0,9},
+            {9,1,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,9,9,9,9,9,9,9,9,9,9,9}
+        };
+
+       for(int i=0;i<5;i++)
+           Board.piece=instance.moveLeft();
+       assertArrayEquals(expResult,instance.getBoard());
+    }
+    
+    /*
+     * Test of correct return on moveRight method when space available
+     */
+    @Test
+    public void testMoveRight1() {
+       Board instance = new Board();
+       Board.piece= new Tetromino(0);
+       instance.markTetromino();
+       int[][] expResult = {
+            {9,0,0,0,0,1,0,0,0,0,0,9},
+            {9,0,0,0,0,1,0,0,0,0,0,9},
+            {9,0,0,0,0,1,0,0,0,0,0,9},
+            {9,0,0,0,0,1,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,9,9,9,9,9,9,9,9,9,9,9}
+        };
+
+       Board.piece=instance.moveRight();
+       assertArrayEquals(expResult,instance.getBoard());
+    }
+    
+    /*
+     * Test of correct return on moveRight method when space no longer available
+     */
+    @Test
+    public void testMoveRight2() {
+       Board instance = new Board();
+       Board.piece= new Tetromino(0);
+       instance.markTetromino();
+       int[][] expResult = {
+            {9,0,0,0,0,0,0,0,0,0,1,9},
+            {9,0,0,0,0,0,0,0,0,0,1,9},
+            {9,0,0,0,0,0,0,0,0,0,1,9},
+            {9,0,0,0,0,0,0,0,0,0,1,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,0,0,0,0,0,0,0,0,0,0,9},
+            {9,9,9,9,9,9,9,9,9,9,9,9}
+        };
+       for(int i=0;i<8;i++)
+            Board.piece=instance.moveRight();
+       assertArrayEquals(expResult,instance.getBoard());
+    }
     /**
      * Test of printBoard method
      */

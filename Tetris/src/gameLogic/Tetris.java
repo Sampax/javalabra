@@ -71,6 +71,7 @@ public class Tetris extends GameLoop implements ActionListener {
     @Override
     public void update() {
         board.moveDown();
+        console.getNextStyle();
     }
     
     @Override

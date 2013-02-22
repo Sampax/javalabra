@@ -19,22 +19,21 @@ public abstract class GameLoop
         running = true;
          
         startup();
-        // convert the time to seconds
         double nextTime = (double)System.nanoTime() / 1000000000.0;
         double maxTimeDiff = 0.5;
         int skippedFrames = 1;
         int maxSkippedFrames = 5;
         while(running)
         {
-            // convert the time to seconds
-            double currTime = (double)System.nanoTime() / 1000000000.0;
-            if((currTime - nextTime) > maxTimeDiff) nextTime = currTime;
-            if(currTime >= nextTime)
+
+            double currentTime = (double)System.nanoTime() / 1000000000.0;
+            if((currentTime - nextTime) > maxTimeDiff) nextTime = currentTime;
+            if(currentTime >= nextTime)
             {
-                // assign the time for the next update
+                
                 nextTime += timeStep;
                 update();
-                if((currTime < nextTime) || (skippedFrames > maxSkippedFrames))
+                if((currentTime < nextTime) || (skippedFrames > maxSkippedFrames))
                 {
                     draw();
                     skippedFrames = 1;
@@ -46,19 +45,15 @@ public abstract class GameLoop
             }
             else
             {
-                // calculate the time to sleep
-                int sleepTime = (int)(1000.0 * (nextTime - currTime));
-                // sanity check
+                int sleepTime = (int)(1000.0 * (nextTime - currentTime));
                 if(sleepTime > 0)
                 {
-                    // sleep until the next update
                     try
                     {
                         Thread.sleep(sleepTime);
                     }
                     catch(InterruptedException e)
                     {
-                        // do nothing
                     }
                 }
             }
